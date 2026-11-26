@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Control de Avisos SAP | Tesalia CBC</title>
+<link rel="stylesheet" href="../styles/avisos/styles.css">
+<link rel="stylesheet" href="../styles/avisos/redesign.css">
+<style id="portal-nav-estilos-20261020">
+
+.sidebar nav.portal-module-nav { display:flex !important; flex-direction:column !important; gap:7px !important; margin:16px 0 18px !important; width:100% !important; }
+.sidebar nav.portal-module-nav > a { box-sizing:border-box !important; display:flex !important; align-items:center !important; gap:9px !important; width:100% !important; min-height:37px !important; padding:10px 12px !important; border-radius:7px !important; background:rgba(255,255,255,.09) !important; color:#fff !important; text-decoration:none !important; font:700 12px/1.3 'Segoe UI',Arial,sans-serif !important; transition:background .2s !important; }
+.sidebar nav.portal-module-nav > a:hover { background:#176cba !important; }
+.sidebar nav.portal-module-nav > a.active { background:#1689e9 !important; color:#fff !important; }
+.sidebar nav.portal-module-nav .module-nav-icon { display:inline-flex !important; justify-content:center !important; align-items:center !important; min-width:17px !important; color:inherit !important; font-size:14px !important; }
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<aside class="sidebar">
+<!-- LOGO -->
+<div class="brand">
+<div class="brand-logo-wrap">
+<img alt="Tesalia CBC" class="brand-logo" src="../../assets/portada/tesalia-cbc-logo.png"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">
+                    CONTROL AVISOS
+                </span>
+<span class="brand-subtitle">
+                    SAP · Ingeniería
+                </span>
+</div>
+</div>
+
+<nav class="portal-module-nav" aria-label="Módulos del portal">
+  <a href="../Login/index.html"><span class="module-nav-icon">⌂</span> Inicio</a>
+  <a href="../avisos/" class="active" aria-current="page"><span class="module-nav-icon">▣</span> Control Avisos</a>
+  <a href="../ordenes/"><span class="module-nav-icon">⚒</span> Control Órdenes</a>
+  <a href="../seguimiento-avisos/"><span class="module-nav-icon">▤</span> Seguimiento Avisos</a>
+  <a href="../planilla-semana/"><span class="module-nav-icon">▦</span> Planilla Semana</a>
+  <a href="../plan_mantenimiento_web/index.html?v=6"><span class="module-nav-icon">▥</span> Plan de Mantenimiento</a>
+  <a href="../dashboard_sap/"><span class="module-nav-icon">▧</span> Dashboard SAP</a>
+</nav>
+
+</aside>
+
+<div class="main-area">
+
+<header class="topbar">
+<div>
+<div class="topbar-eyebrow">INGENIERÍA Y MANTENIMIENTO · MACHACHI</div>
+<h1>
+                    Control de Avisos SAP
+                </h1>
+<p>Seguimiento de avisos, estados, responsables y tiempos de notificación</p>
+</div>
+<!-- ÚLTIMA ACTUALIZACIÓN -->
+<div class="status-chip">
+<span class="status-dot"></span>
+<div>
+<span class="status-label">
+                        Última actualización SAP
+                    </span>
+<strong id="lastUpdate">
+                        --
+                    </strong>
+</div>
+</div>
+</header>
+
+<main class="content"><section class="filter-toolbar" aria-label="Filtros de consulta SAP">
+  <div class="filter-toolbar-header"><div class="filter-heading-icon">☷</div><div><h2>Filtros de consulta</h2><p>Consulta y análisis de avisos de mantenimiento SAP</p></div></div>
+  <div class="filter-toolbar-grid">
+    <div class="filter-group filter-field filter-field-month"><label for="monthFilter"><span class="filter-symbol">▦</span> Mes</label><select id="monthFilter"><option value="Todas">Todos los meses</option></select></div>
+    <div class="filter-group filter-field filter-field-day"><label for="dayFilter"><span class="filter-symbol">▣</span> Día – Fecha de aviso</label><select id="dayFilter"><option value="Todas">Todos los días</option></select></div>
+    <div class="filter-group filter-field filter-field-class"><label for="classFilter"><span class="filter-symbol">◆</span> Clasificación aviso</label><select id="classFilter"><option value="Todas">Todas las clasificaciones</option><option value="Emergente">Emergente</option><option value="Correctivo">Correctivo</option><option value="Mal levantada">Mal levantada</option></select></div>
+    <div class="filter-group filter-choice filter-choice-status"><div class="filter-choice-head"><span class="filter-choice-title"><span class="choice-icon">▤</span> Estado final aviso</span><span class="filter-count" id="statusCount">0 seleccionados</span></div><div class="checkbox-list" id="statusChecks"></div></div>
+    <div class="filter-group filter-choice filter-choice-time"><div class="filter-choice-head"><span class="filter-choice-title"><span class="choice-icon">◷</span> Estado de tiempo</span><span class="filter-count" id="timeCount">0 seleccionados</span></div><div class="checkbox-list" id="timeChecks"></div></div>
+    <div class="filter-group filter-choice filter-choice-responsible"><div class="filter-choice-head"><span class="filter-choice-title"><span class="choice-icon">♟</span> Responsable</span><span class="filter-count" id="responsibleCount">0 seleccionados</span></div><div class="checkbox-list" id="responsibleChecks"></div></div>
+    <div class="filter-toolbar-footer"><button type="button" class="btn btn-reset" id="btnReset">↻ &nbsp;Limpiar filtros</button><div class="filter-footer-right"><button type="button" class="btn btn-primary" id="btnRefresh">↻ &nbsp;Actualizar ahora</button><button type="button" class="btn btn-secondary" id="btnDownload">↓ &nbsp;Descargar detalle</button></div></div>
+  </div>
+</section>
+
+<section class="kpi-grid">
+<!-- TOTAL -->
+<article class="kpi-card kpi-blue">
+<div class="kpi-label">
+                        Avisos Totales
+                    </div>
+<div class="kpi-value" id="kpiTotal">
+                        0
+                    </div>
+</article>
+<!-- CERRADOS -->
+<article class="kpi-card kpi-green">
+<div class="kpi-label">
+                        Avisos Cerrados
+                    </div>
+<div class="kpi-value" id="kpiClosed">
+                        0
+                    </div>
+</article>
+<!-- ABIERTOS -->
+<article class="kpi-card kpi-red">
+<div class="kpi-label">
+                        Avisos Abiertos
+                    </div>
+<div class="kpi-value" id="kpiOpen">
+                        0
+                    </div>
+</article>
+<!-- % CIERRE -->
+<article class="kpi-card kpi-purple">
+<div class="kpi-label">
+                        % Cierre
+                    </div>
+<div class="kpi-value" id="kpiPct">
+                        0.0%
+                    </div>
+</article>
+<!-- PROMEDIO -->
+<article class="kpi-card kpi-orange">
+<div class="kpi-label">
+                        Promedio Días Notificación
+                    </div>
+<div class="kpi-value" id="kpiAvg">
+                        0.0
+                    </div>
+</article>
+</section>
+
+<section class="charts-grid charts-grid-four"><!-- ESTADO FINAL -->
+<article class="panel">
+<div class="panel-header">
+<div>
+<span class="panel-kicker">
+                                ESTADO
+                            </span>
+<h2>
+                                Estado Final Aviso
+                            </h2>
+</div>
+</div>
+<div class="chart-canvas-wrap">
+<canvas id="pie"></canvas>
+</div>
+</article>
+<!-- ESTADO TIEMPO -->
+<article class="panel panel-time">
+<div class="panel-header">
+<div>
+<span class="panel-kicker">
+                                CUMPLIMIENTO
+                            </span>
+<h2>
+                                Estado Tiempo
+                            </h2>
+</div>
+<span class="panel-badge">
+                            % + Cantidad
+                        </span>
+</div>
+<div class="chart-canvas-wrap">
+<canvas id="pieTiempo"></canvas>
+</div>
+</article>
+<!-- RESPONSABLE -->
+<article class="panel">
+<div class="panel-header">
+<div>
+<span class="panel-kicker">
+                                GESTIÓN
+                            </span>
+<h2>
+                                Avisos por Responsable y Estado Final
+                            </h2>
+</div>
+</div>
+<div class="chart-canvas-wrap">
+<canvas id="resp"></canvas>
+</div>
+</article>
+
+</section>
+
+<section class="charts-grid charts-grid-bottom">
+<article class="panel panel-monthly-average">
+<div class="panel-header">
+<div>
+<span class="panel-kicker">
+                                TIEMPO
+                            </span>
+<h2>
+                                Promedio Días Notificación por Mes
+                            </h2>
+</div>
+</div>
+<div class="chart-canvas-wrap chart-large">
+<canvas id="avgMonth"></canvas>
+</div>
+</article>
+
+
+<article class="panel">
+<div class="panel-header">
+<div>
+<span class="panel-kicker">
+                                EFICIENCIA
+                            </span>
+<h2>
+                                Promedio Días por Responsable
+                            </h2>
+</div>
+</div>
+<div class="chart-canvas-wrap">
+<canvas id="avgResp"></canvas>
+</div>
+</article>
+<!-- AVISOS POR MES -->
+<article class="panel panel-monthly-trend">
+<div class="panel-header">
+<div>
+<span class="panel-kicker">
+                                TENDENCIA
+                            </span>
+<h2>
+                                Avisos por Mes y Estado Final
+                            </h2>
+</div>
+</div>
+<div class="chart-canvas-wrap chart-large">
+<canvas id="month"></canvas>
+</div>
+</article>
+<!-- PROMEDIO MES -->
+
+</section>
+<!-- =================================================
+                 TABLA
+                 ================================================= -->
+<section class="panel table-panel">
+<div class="panel-header">
+<div>
+<span class="panel-kicker">
+                            DETALLE
+                        </span>
+<h2>
+                            Detalle de Avisos
+                        </h2>
+</div>
+</div>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>
+                                    Responsable
+                                </th>
+<th>
+                                    Notificación
+                                </th>
+<th>
+                                    Orden
+                                </th>
+<th>
+                                    Status sistema
+                                </th>
+<th>
+                                    Descripción
+                                </th>
+<th>
+                                    Descripción_1
+                                </th>
+<th>
+                                    Descripción_2
+                                </th>
+<th>
+                                    Fecha de aviso
+                                </th>
+<th>
+                                    Fecha contab.
+                                </th>
+<th>
+                                    Días Notificación
+                                </th>
+<th>
+                                    Estado Tiempo
+                                </th>
+<th>
+                                    Texto de notificación
+                                </th>
+<th>
+                                    Costo real
+                                </th>
+<th>
+                                    Acción OT
+                                </th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+</div>
+
+<div aria-hidden="true" class="ot-modal ot-hidden" id="otModal">
+<div class="ot-dialog">
+<div class="ot-dialog-header">
+<div>
+<span class="panel-kicker">SAP · IW22 → ORDEN</span>
+<h2>Crear OT desde aviso</h2>
+</div>
+<button class="ot-close" id="otClose" type="button">×</button>
+</div>
+<div class="ot-info-grid">
+<label>Aviso
+                <input autocomplete="off" id="otAviso" inputmode="numeric" placeholder="Ej. 10087715" type="text"/>
+</label>
+<label>Tipo OT
+                <input id="otTipo" readonly="" type="text" value="ZM02"/>
+</label>
+<label class="ot-wide">Descripción
+                <textarea id="otDescripcion" readonly=""></textarea>
+</label>
+<label>Fecha inicio extremo
+                <input id="otFechaInicio" readonly="" type="text"/>
+</label>
+<label>Fecha fin extremo
+                <input id="otFechaFin" readonly="" type="text"/>
+</label>
+<label class="ot-required">Pto. trabajo responsable
+                <input autocomplete="off" id="otPtoTrabajo" placeholder="Ej. E_ELE 01" type="text"/>
+</label>
+</div>
+<div class="ot-rule-box">
+<strong>Reglas automáticas</strong>
+<span>Fin extremo = Inicio extremo.</span>
+<span>Fecha operación = Inicio extremo.</span>
+<span>Hora inicio operación = Inicio de avería en SAP.</span>
+<span>Hora fin operación = Inicio de avería + 1 hora.</span>
+</div>
+<div class="ot-message" id="otMessage"></div>
+<div class="ot-actions">
+<button class="ot-btn ot-btn-secondary" id="otCancel" type="button">Cancelar</button>
+<button class="ot-btn ot-btn-primary" id="otPrepare" type="button">Preparar solicitud OT</button>
+</div>
+</div>
+</div>
+<script src="../../Scripts/Avisos/avisos.js"></script>
+</body>
+</html>

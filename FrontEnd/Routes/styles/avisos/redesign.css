@@ -1,0 +1,148 @@
+/* Tesalia CBC | Nueva portada de avisos. Estilos aditivos, sin cambios de lógica */
+:root{--bg:#f1f6fc;--text:#0a2548;--muted:#59708c;--sidebar:#051f3c;--blue:#0877f9;--border:#dfeaf6}
+body{background:var(--bg);color:var(--text)}
+.sidebar{width:235px;min-width:235px;background:linear-gradient(165deg,#061d38 0%,#082d51 65%,#05172f 100%);padding:20px 13px;box-shadow:5px 0 25px #071f3b15;min-height:100vh}
+.brand{flex-direction:column;align-items:flex-start;padding:4px 7px 20px}
+.brand-logo-wrap{width:182px;height:57px;background:transparent;border-radius:0;overflow:visible}
+.brand-logo{object-fit:contain;object-position:left center;filter:brightness(0) invert(1)}
+.brand-text{padding-top:8px}.brand-title{font-size:16px;letter-spacing:.5px}.brand-subtitle{font-size:12px}
+.sidebar nav{margin-top:10px!important}.sidebar nav a{font-size:12px;transition:background .2s,transform .2s}.sidebar nav a:hover{background:#137ef2!important;transform:translateX(2px)}
+.main-area{min-width:0}.topbar{min-height:194px;align-items:flex-start;background:linear-gradient(90deg,rgba(247,251,255,.98) 0%,rgba(247,251,255,.94) 36%,rgba(247,251,255,.12) 78%),url('../assets/portada/planta-machachi.jpg') center 47%/cover no-repeat;border-bottom:3px solid #c9e5ff;padding:27px 30px}
+.topbar h1{font-size:clamp(27px,3vw,43px);color:#082448;letter-spacing:-.8px}.topbar h1::after{content:' SAP';color:#0877f9}.topbar h1{font-size:0}.topbar h1::before{content:'Control de Avisos';font-size:clamp(27px,3vw,43px)}.topbar h1::after{font-size:clamp(27px,3vw,43px)}
+.topbar-eyebrow{color:#0966cc;font-weight:900;letter-spacing:1.7px}.topbar p{font-size:13px;color:#385476;max-width:470px;line-height:1.5}
+.status-chip{background:#ffffffee;border:1px solid #d8e7f6;box-shadow:0 4px 16px #08244815;border-radius:12px}
+.content{padding:18px 20px 30px}
+.filter-toolbar{background:#fff;border:1px solid #dce8f6;border-radius:14px;padding:14px 15px;margin-bottom:13px;box-shadow:0 4px 18px #08244808}
+.filter-toolbar-heading{font-size:16px;font-weight:800;color:#09294d;margin-bottom:12px}
+.filter-toolbar-grid{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:10px;align-items:start}
+.filter-toolbar .filter-group{margin:0;min-width:0}.filter-toolbar .filter-group label,.filter-toolbar .filter-label{color:#254365;font-size:11px;font-weight:750}
+.filter-toolbar select{height:37px;background:#f7faff;color:#17385b;border:1px solid #cbdcf0;font-size:12px}
+.filter-toolbar .checkbox-list{max-height:86px;overflow:auto;padding:6px 8px;border:1px solid #dce8f6;border-radius:8px;background:#f8fbff}
+.filter-toolbar .checkbox-list label{font-size:10px;color:#294563;font-weight:500}
+.filter-toolbar .sidebar-actions{display:flex;grid-column:1/-1;gap:10px;justify-content:flex-end}
+.filter-toolbar .btn{padding:0 15px;background:#0877f9;color:white;border:0;min-width:140px}.filter-toolbar .btn-secondary{background:#eff6ff;color:#0764c3;border:1px solid #c7ddf7}
+.kpi-grid{gap:10px}.kpi-card{border:1px solid #e0ebf7!important;border-radius:13px!important;box-shadow:0 4px 16px #0824480a!important;background:#fff!important;min-height:110px}
+.kpi-label{font-size:12px!important;color:#385474!important;font-weight:700}.kpi-value{font-size:clamp(23px,2.2vw,34px)!important}
+.charts-grid{gap:12px}.charts-grid-four{grid-template-columns:repeat(3,minmax(0,1fr))}.charts-grid-four>.panel{min-width:0}.charts-grid-four>.panel-monthly-average{grid-column:span 1;order:3;border:2px solid #5ca9ff}.charts-grid-four>.panel:nth-child(4){order:4}.charts-grid-four>.panel:nth-child(5){order:5}
+.panel{border:1px solid #e0ebf7!important;border-radius:13px!important;box-shadow:0 4px 16px #0824480a!important;background:#fff!important}
+.panel h2{color:#0c2b4e!important}.panel-kicker{color:#1375d6!important}.table-panel{overflow:hidden}.table-wrapper{overflow:auto;max-width:100%}.table-wrapper table{min-width:1100px}.table-wrapper thead th{position:sticky;top:0;background:#eaf3ff;color:#14395f}
+.ot-dialog{border-radius:17px;box-shadow:0 18px 65px #031d3d50}.ot-btn-primary{background:#0877f9}
+@media(max-width:1400px){.filter-toolbar-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.charts-grid-four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:950px){.sidebar{width:100%;min-width:0;min-height:auto}.topbar{min-height:175px}.filter-toolbar-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.charts-grid-four{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.topbar{padding:20px 15px;background-position:60% center}.content{padding:12px}.filter-toolbar-grid{grid-template-columns:1fr}.charts-grid-four{grid-template-columns:1fr}.filter-toolbar .sidebar-actions{flex-direction:column}.filter-toolbar .btn{width:100%}}
+
+/* V2: cuatro paneles compactos en una misma fila, más tabla visible */
+@media(min-width:1450px){.charts-grid-four{grid-template-columns:repeat(4,minmax(0,1fr))}.charts-grid-four>.panel-monthly-average{grid-column:auto;order:4}.charts-grid-four>.panel:nth-child(2){order:1}.charts-grid-four>.panel:nth-child(3){order:2}.charts-grid-four>.panel:nth-child(4){order:3}.charts-grid-four>.panel:nth-child(5){order:5}}
+.chart-canvas-wrap{min-height:225px}.chart-canvas-wrap canvas{max-width:100%}.panel-monthly-average{border:2px solid #75b7ff!important}
+
+/* V3: distribución definitiva, cuatro gráficos arriba y dos abajo */
+.charts-grid.charts-grid-four{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;align-items:stretch}
+.charts-grid.charts-grid-four>.panel{grid-column:auto!important;grid-row:auto!important;order:initial!important;min-width:0!important;margin:0!important}
+.charts-grid.charts-grid-four>.panel:nth-child(1){order:4!important}
+.charts-grid.charts-grid-four>.panel:nth-child(2){order:1!important}
+.charts-grid.charts-grid-four>.panel:nth-child(3){order:2!important}
+.charts-grid.charts-grid-four>.panel:nth-child(4){order:3!important}
+.charts-grid.charts-grid-bottom{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+.charts-grid.charts-grid-bottom>.panel{min-width:0!important;margin:0!important}
+.charts-grid .panel .chart-canvas-wrap,.charts-grid .panel .chart-canvas-wrap.chart-large{height:260px!important;min-height:0!important;padding:8px 12px 12px!important;position:relative}
+.charts-grid .panel .chart-canvas-wrap canvas{max-width:100%!important;max-height:100%!important}
+.charts-grid .panel .panel-header{min-height:58px}
+/* logo oscuro sobre una base blanca, sin filtro que elimine sus colores */
+.brand-logo-wrap{background:#fff!important;border-radius:9px!important;padding:7px!important;width:188px!important;height:67px!important;overflow:hidden!important}
+.brand-logo{filter:none!important;width:100%!important;height:100%!important;object-fit:contain!important}
+@media(max-width:1350px){.charts-grid.charts-grid-four{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:700px){.charts-grid.charts-grid-four,.charts-grid.charts-grid-bottom{grid-template-columns:1fr!important}.charts-grid .panel .chart-canvas-wrap,.charts-grid .panel .chart-canvas-wrap.chart-large{height:250px!important}}
+
+
+/* Filtros visuales renovados - octubre 2026 */
+.filter-toolbar{padding:20px 22px!important;border-radius:17px!important;box-shadow:0 10px 28px rgba(11,52,98,.07)!important}
+.filter-toolbar-header{display:flex;align-items:center;gap:13px;margin-bottom:17px}
+.filter-heading-icon{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;background:#e7f1ff;border-radius:12px;color:#0877f9;font-size:31px;font-weight:800}
+.filter-toolbar-header h2{margin:0;font-size:23px;letter-spacing:-.5px;color:#0a2a50}
+.filter-toolbar-header p{margin:4px 0 0;color:#526b89;font-size:13px}
+.filter-toolbar .filter-toolbar-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px 16px!important;align-items:stretch}
+.filter-toolbar .filter-group{margin:0!important;min-width:0!important}
+.filter-toolbar .filter-field{border-radius:13px;background:#edf5ff;padding:13px 15px 12px}
+.filter-toolbar .filter-field label{display:flex;align-items:center;gap:9px;color:#092c53;font-size:13px;font-weight:800;margin:0 0 8px}
+.filter-symbol{color:#0877f9;font-size:23px;line-height:1}
+.filter-toolbar .filter-field select{height:42px!important;border-radius:9px!important;background:#fff!important;border:1px solid #aac9f4!important;color:#17385b!important;font-size:13px!important;padding:0 12px!important}
+.filter-toolbar .filter-choice{border-radius:13px;overflow:hidden;padding:0 0 10px;min-height:180px}
+.filter-choice-status{background:#fff0f1}.filter-choice-time{background:#fff8e8}.filter-choice-responsible{background:#edf9f3}
+.filter-choice-head{display:flex;align-items:center;justify-content:space-between;gap:7px;min-height:51px;padding:11px 14px}
+.filter-choice-status .filter-choice-head{background:#ffe8eb}.filter-choice-time .filter-choice-head{background:#fff1ce}.filter-choice-responsible .filter-choice-head{background:#e2f5e9}
+.filter-choice-title{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:800;color:#092c53}
+.choice-icon{font-size:23px;line-height:1}.filter-choice-status .choice-icon{color:#e73c53}.filter-choice-time .choice-icon{color:#e69c05}.filter-choice-responsible .choice-icon{color:#1da965}
+.filter-count{white-space:nowrap;border:1px solid #b8d6fc;border-radius:8px;background:#eef6ff;padding:5px 7px;color:#0a5cba;font-size:11px;font-weight:800}
+.filter-toolbar .filter-choice .checkbox-list{max-height:135px!important;overflow-y:auto!important;background:transparent!important;border:0!important;border-radius:0!important;padding:8px 15px 3px!important;gap:9px!important}
+.filter-toolbar .filter-choice .checkbox-list label{display:flex!important;align-items:center!important;gap:10px!important;margin:0!important;font-size:12px!important;font-weight:500!important;color:#183858!important;cursor:pointer}
+.filter-toolbar .filter-choice .checkbox-list input{width:16px;height:16px;flex:0 0 16px;accent-color:#0877f9;cursor:pointer}
+.filter-toolbar .filter-toolbar-footer{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #e3edf8;padding-top:14px;margin-top:1px}
+.filter-footer-right{display:flex;gap:10px;flex-wrap:wrap}
+.filter-toolbar .filter-toolbar-footer .btn{height:42px!important;padding:0 18px!important;border-radius:10px!important;font-size:12px!important;min-width:0!important;white-space:nowrap}
+.filter-toolbar .filter-toolbar-footer .btn-reset{background:#f7fbff!important;border:1px solid #9fc8ff!important;color:#086ed6!important}
+.filter-toolbar .filter-toolbar-footer .btn-primary{background:#0877f9!important;color:#fff!important}
+.filter-toolbar .filter-toolbar-footer .btn-secondary{background:#f7fbff!important;border:1px solid #9fc8ff!important;color:#086ed6!important}
+@media(max-width:1100px){.filter-toolbar .filter-toolbar-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:700px){.filter-toolbar{padding:15px!important}.filter-toolbar .filter-toolbar-grid{grid-template-columns:1fr!important}.filter-toolbar .filter-toolbar-footer{align-items:stretch;flex-direction:column}.filter-footer-right{flex-direction:column}.filter-toolbar .filter-toolbar-footer .btn{width:100%!important}.filter-toolbar-header h2{font-size:19px}}
+
+/* Gráfico de tendencia mensual: ocupa ancho completo */
+.charts-grid.charts-grid-bottom>.panel-monthly-trend{grid-column:1/-1!important}
+.panel-monthly-trend .chart-canvas-wrap.chart-large{height:365px!important}
+@media(max-width:700px){.panel-monthly-trend .chart-canvas-wrap.chart-large{height:320px!important}}
+
+/* Distribución aprobada: 3 gráficos arriba y 3 abajo */
+.charts-grid.charts-grid-four,
+.charts-grid.charts-grid-bottom {
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+  align-items:stretch!important;
+}
+.charts-grid.charts-grid-four>.panel,
+.charts-grid.charts-grid-bottom>.panel,
+.charts-grid.charts-grid-four>.panel-monthly-average,
+.charts-grid.charts-grid-bottom>.panel-monthly-trend {
+  grid-column:auto!important;
+  grid-row:auto!important;
+  order:initial!important;
+  margin:0!important;
+  min-width:0!important;
+  width:100%!important;
+}
+.charts-grid .panel .chart-canvas-wrap,
+.charts-grid .panel .chart-canvas-wrap.chart-large,
+.panel-monthly-trend .chart-canvas-wrap.chart-large {
+  height:275px!important;
+  min-height:275px!important;
+  padding:10px 9px 12px!important;
+  position:relative;
+}
+.charts-grid .panel .panel-header{min-height:60px!important}
+.charts-grid .panel .chart-canvas-wrap canvas{max-width:100%!important;max-height:100%!important}
+@media(max-width:1100px){
+  .charts-grid.charts-grid-four,.charts-grid.charts-grid-bottom{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+  .charts-grid.charts-grid-four,.charts-grid.charts-grid-bottom{grid-template-columns:1fr!important}
+}
+
+/* CORRECCIÓN FINAL: seis tarjetas en dos filas de tres */
+@media (min-width: 1101px) {
+  .charts-grid.charts-grid-four, .charts-grid.charts-grid-bottom {
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+  }
+}
+.charts-grid.charts-grid-four > .panel, .charts-grid.charts-grid-bottom > .panel {
+  grid-column: auto !important; grid-row: auto !important; order: 0 !important;
+  min-width: 0 !important; width: auto !important;
+}
+.charts-grid.charts-grid-bottom > .panel-monthly-trend {grid-column:auto!important}
+.charts-grid .panel .chart-canvas-wrap {height:300px!important;min-height:300px!important}
+.charts-grid .panel .panel-header {min-height:65px!important}
+
+/* Navegación completa: misma estructura de módulos que la portada */
+.sidebar .portal-module-nav{display:flex!important;flex-direction:column;gap:5px;margin:15px 0 18px!important}
+.sidebar .portal-module-nav a{display:flex;align-items:center;gap:10px;min-height:37px;padding:10px 12px;border-radius:8px;color:#dbe9f9;text-decoration:none;background:rgba(255,255,255,.075);font-size:12px;font-weight:700;transition:background .15s ease}
+.sidebar .portal-module-nav a:hover{background:#176cba!important;transform:none}
+.sidebar .portal-module-nav a.active{background:#1689e9;color:#fff}
+.sidebar .portal-module-nav .module-nav-icon{display:inline-flex;justify-content:center;min-width:16px;font-size:13px}

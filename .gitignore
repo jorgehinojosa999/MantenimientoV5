@@ -1,0 +1,45 @@
+# Credenciales y variables de entorno
+.env
+.env.*
+!.env.example
+
+# Scripts SAP con credenciales
+*.vbs
+
+# Archivos Python generados
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Entornos virtuales Python
+venv/
+.venv/
+env/
+
+# Archivos Excel y exportaciones SAP
+*.xlsx
+*.xls
+*.xlsm
+*.csv
+
+# Archivos temporales y respaldos
+TEMP_*
+~$*
+*.tmp
+*.bak
+*.lock
+
+# Registros de ejecución
+*.log
+LOG_*.txt
+
+# Visual Studio Code
+.vscode/
+
+# Node.js
+node_modules/
+
+# Archivos de Windows
+Thumbs.db
+Desktop.ini
